@@ -3,9 +3,11 @@
 {% block title %}New Activity{% endblock %}
 
 {% block body %}
-    <h1>Create new Activity</h1>
+    <h1>Créer nouvelle activité </h1>
 
+    <div class="container">
     {{ include('activity/_form.html.twig') }}
-
-    <a href="{{ path('app_activity_index') }}">back to list</a>
+    <p></p>
+    <a class="btn btn-dark" href="{{ path('app_activity_index') }}">Retour à la liste</a>
+    </div>
 {% endblock %}

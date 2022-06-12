@@ -3,15 +3,20 @@
 {% block title %}Activity index{% endblock %}
 
 {% block body %}
-    <h1>Activity index</h1>
+    <h1>Liste des activités </h1>
 
-    <table class="table">
+    <div class="container">
+
+
+    <a class="btn btn-primary" href="{{ path('app_activity_new') }}">Créer une nouvelle activité</a>
+
+    <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Name</th>
+                <th>#</th>
+                <th>Nom de l'activité</th>
                 <th>Description</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -21,17 +26,21 @@
                 <td>{{ activity.name }}</td>
                 <td>{{ activity.description }}</td>
                 <td>
-                    <a href="{{ path('app_activity_show', {'id': activity.id}) }}">show</a>
-                    <a href="{{ path('app_activity_edit', {'id': activity.id}) }}">edit</a>
+                    <span>
+                        <a class="btn btn-dark" href="{{ path('app_activity_show', {'id': activity.id}) }}">Voir</a>
+                        <p></p>
+                        <a class="btn btn-dark" href="{{ path('app_activity_edit', {'id': activity.id}) }}">Modifier</a>
+                    </span>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="4">Aucune activité trouvé</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('app_activity_new') }}">Create new</a>
+
+    </div>
 {% endblock %}
