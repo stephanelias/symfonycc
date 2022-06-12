@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Activity;
 use App\Form\ActivityType;
 use App\Repository\ActivityRepository;
+use cebe\markdown\Markdown;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,10 +19,18 @@ class ActivityController extends AbstractController
     /**
      * @Route("/", name="app_activity_index", methods={"GET"})
      */
-    public function index(ActivityRepository $activityRepository): Response
+    public function index(ActivityRepository $activityRepository, Markdown $markdown): Response
     {
+        $activities = $activityRepository->findAll() ;
+        $parsedActivities = [] ;
+        foreach ($activities as $activity) {
+            $parseActivity = $activity ;
+            $parseActivity->setDescription($markdown->parse($activity->getDescription())) ;
+            $parsedActivities[] = $parseActivity ;
+        }
+
         return $this->render('activity/index.html.twig', [
-            'activities' => $activityRepository->findAll(),
+            'activities' => $parsedActivities,
         ]);
     }
 

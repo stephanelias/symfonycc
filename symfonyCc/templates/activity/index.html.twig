@@ -24,7 +24,7 @@
             <tr>
                 <td>{{ activity.id }}</td>
                 <td>{{ activity.name }}</td>
-                <td>{{ activity.description }}</td>
+                <td>{{ activity.description |raw }}</td>
                 <td>
                     <span>
                         <a class="btn btn-dark" href="{{ path('app_activity_show', {'id': activity.id}) }}">Voir</a>
