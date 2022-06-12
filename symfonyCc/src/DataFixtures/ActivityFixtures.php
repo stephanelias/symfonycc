@@ -1,0 +1,22 @@
+<?php
+
+namespace App\DataFixtures;
+
+use App\Entity\Activity;
+use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
+
+class ActivityFixtures extends Fixture
+{
+    public function load(ObjectManager $manager): void
+    {
+        $faker = Factory::create("fr_FR") ;
+        for ($i = 0 ; $i < 5 ; $i++) {
+            $activity = new Activity() ;
+            $activity->setName($faker->sentence)->setDescription($faker->paragraph) ;
+            $manager->persist($activity);
+        }
+        $manager->flush();
+    }
+}
