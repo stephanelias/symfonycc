@@ -58,10 +58,12 @@ class ActivityController extends AbstractController
     /**
      * @Route("/{id}", name="app_activity_show", methods={"GET"})
      */
-    public function show(Activity $activity): Response
+    public function show(Activity $activity, Markdown $markdown): Response
     {
+        $parsedActivity = $activity ;
+        $parsedActivity->setDescription($markdown->parse($activity->getDescription())) ; 
         return $this->render('activity/show.html.twig', [
-            'activity' => $activity,
+            'activity' => $parsedActivity,
         ]);
     }
 
